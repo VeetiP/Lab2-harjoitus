@@ -20,5 +20,8 @@ def encode(s):
     return crypted
 
 def decode(s):
-    return c
-
+    d = encode(s)
+    if d.isalpha():
+        if d.isupper():
+            d=d.lower()
+    return d
