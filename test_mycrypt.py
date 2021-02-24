@@ -42,7 +42,17 @@ def test_invalid_char(invalid_input):
         mycrypt.encode(invalid_input)
 
 
-@pytest.mark.parametrize("invalid_input", [])
+@pytest.mark.parametrize("invalid_input", [123, 20.5, 1j, ["apple", "banana", "cherry"], 
+    ("apple", "banana", "cherry"), 
+    range(6), 
+    {"name" : "John", "age" : 36},
+    {"apple", "banana", "cherry"},
+    frozenset({"apple", "banana", "cherry"}),
+    True,
+    b"Hello",
+    bytearray(5),
+    memoryview(bytes(5))
+])
     
 def test_invalid_types(invalid_input):
     '''Invalid parameter types should raise TypeError'''
@@ -59,7 +69,7 @@ def test_timing():
 
     Hint: pad your string to max length and only return wanted length
     '''
-    timing1 = min(timeit.repeat('mycrypt.encode("a")',
+    timing1 = min(timeit.repeat('mycrypt.encode("a"*1000)',
                                 'import mycrypt', repeat=3, number=30))
     timing2 = min(timeit.repeat('mycrypt.encode("a"*1000)',
                                 'import mycrypt', repeat=3, number=30))
